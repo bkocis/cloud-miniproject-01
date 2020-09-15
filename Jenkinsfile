@@ -40,10 +40,12 @@ pipeline {
 			    }
             }
 		}
-        stage('Deploy to AWS EKS') {
+        stage('run docker') {
             agent any
               steps{
-                sh 'docker run -p 8081:8081 capstone'
+                withDockerRegistry([url: "", credentialsId: "bkocisdocker"]){
+                sh 'docker run -p 8081:8081 cloud-miniproject-01'
+                }
               }
         }		
     }
