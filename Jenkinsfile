@@ -7,7 +7,7 @@ pipeline {
                 sh 'echo "Starting the project!"'
             }
         }
-        stage('Lint flask python app') {
+        stage('Unit test flask app') {
             agent { docker { image 'python:3.7.2' } }
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
