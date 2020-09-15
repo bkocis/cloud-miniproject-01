@@ -40,12 +40,27 @@ pipeline {
 			    }
             }
 		}
-        stage('run docker') {
+        stage('Stat Kubernetes cluster') {
+            agent any
+            steps {
+                sh 'eksctl create cluster --name cloud-miniproject-01 --version 1.16 --nodegroup-name standard-workers --node-type t2.micro --nodes 2 --nodes-min 1 --nodes-max 4 --node-ami auto --region eu-central-1'
+            }
+
+        }
+        stage('Deploy to AWS EKS') {
             agent any
               steps{
-                withDockerRegistry([url: "", credentialsId: "bkocisdocker"]){
-                sh 'docker run -p 8081:8081 cloud-miniproject-01'
-                }
+                  withAWS(credentials: 'jenkins3-capstone_user_credentials', region: 'eu-central-1') {
+                    sh "aws eks --region eu-central-1 update-kubeconfig --name cloud-miniproject-01"
+                    sh "kubectl config use-context arn:aws:eks:eu-central-1:643112058200:cluster/cloud-miniproject-01"
+                    sh "kubectl get nodes"
+                    sh "kubectl get deployments"
+                    sh "kubectl apply -f deployment.yml"
+                    sh "kubectl set image deployments/cloud-miniproject-01 cloud-miniproject-01=bkocis/cloud-miniproject-01:latest"
+                    sh "kubectl get deployments"
+                    sh "kubectl rollout status deployments/cloud-miniproject-01"
+                    sh "kubectl get service/cloud-miniproject-01"
+                  }
               }
         }		
     }
