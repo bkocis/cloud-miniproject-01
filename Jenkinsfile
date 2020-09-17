@@ -53,7 +53,7 @@ pipeline {
             }
 
         }
-        stage('Deploy to AWS EKS') {
+        stage('Deploy to AWS EKS cluster') {
             agent any
               steps{
                   withAWS(credentials: 'jenkins3-capstone_user_credentials', region: 'eu-central-1') {
@@ -66,6 +66,15 @@ pipeline {
                     sh "kubectl get deployments"
                     sh "kubectl rollout status deployments/cloud-miniproject-01"
                     sh "kubectl get service/cloud-miniproject-01"
+                  }
+              }
+        }
+        stage('Delete AWS EKS cluster') {
+            agent any
+              steps{
+                  withAWS(credentials: 'jenkins3-capstone_user_credentials', region: 'eu-central-1') {
+                    sh "sleep 120"
+                    sh "eksctl delete cluster --name cloud-miniproject-01"
                   }
               }
         }		
