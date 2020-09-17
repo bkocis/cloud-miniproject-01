@@ -43,6 +43,7 @@ pipeline {
         stage('Stat Kubernetes cluster') {
             agent any
             steps {
+                withAWS(credentials: 'jenkins3-capstone_user_credentials', region: 'eu-central-1') 
                 sh 'aws --version'
                 sh 'eksctl version'
                 sh 'export PATH=$PATH:$HOME/bin'
