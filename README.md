@@ -1,5 +1,5 @@
 
-# Building and deploying flask apps using Jenkins and Kubernetes 
+# Building and deploying flask apps in Docker using Jenkins and Kubernetes 
 
 This repo is for exercise only and contains Jenkinsfiles for dockerizing and running flask apps in various ways. The repo has multiple branches for various scenarios and they are built separatelly in Jenskins.
 
