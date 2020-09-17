@@ -48,7 +48,7 @@ pipeline {
                 sh 'eksctl version'
                 sh 'export PATH=$PATH:$HOME/bin'
                 sh 'echo "Starting Kubernetes cluster..."'
-                sh 'eksctl create cluster --name cloud-miniproject-01 --version 1.16 --nodegroup-name standard-workers --node-type t2.small --nodes 2 --nodes-min 1 --nodes-max 4 --node-ami auto --region eu-central-1'
+                sh 'eksctl create cluster --name cloud-miniproject-01 --version 1.16 --nodegroup-name standard-workers --node-type t2.small --nodes 1 --nodes-min 1 --nodes-max 4 --node-ami auto --region eu-central-1'
                 }
             }
 
