@@ -55,7 +55,7 @@ pipeline {
         stage('Deploy to AWS EKS') {
             agent any
               steps{
-                  withAWS(credentials: 'jenkins3-capstone_user_credentials', region: 'eu-central-1') {
+                  withAWS(credentials: 'jenkins3-capstone_user_credentials', region: 'eu-central-1') 
                     sh "aws eks --region eu-central-1 update-kubeconfig --name cloud-miniproject-01"
                     sh "kubectl config use-context arn:aws:eks:eu-central-1:643112058200:cluster/cloud-miniproject-01"
                     sh "kubectl get nodes"
