@@ -43,19 +43,20 @@ pipeline {
         stage('Stat Kubernetes cluster') {
             agent any
             steps {
-                withAWS(credentials: 'jenkins3-capstone_user_credentials', region: 'eu-central-1') 
+                withAWS(credentials: 'jenkins3-capstone_user_credentials', region: 'eu-central-1') {
                 sh 'aws --version'
                 sh 'eksctl version'
                 sh 'export PATH=$PATH:$HOME/bin'
                 sh 'echo "Starting Kubernetes cluster..."'
                 sh 'eksctl create cluster --name cloud-miniproject-01 --version 1.16 --nodegroup-name standard-workers --node-type t2.small --nodes 2 --nodes-min 1 --nodes-max 4 --node-ami auto --region eu-central-1'
+                }
             }
 
         }
         stage('Deploy to AWS EKS') {
             agent any
               steps{
-                  withAWS(credentials: 'jenkins3-capstone_user_credentials', region: 'eu-central-1') 
+                  withAWS(credentials: 'jenkins3-capstone_user_credentials', region: 'eu-central-1') {
                     sh "aws eks --region eu-central-1 update-kubeconfig --name cloud-miniproject-01"
                     sh "kubectl config use-context arn:aws:eks:eu-central-1:643112058200:cluster/cloud-miniproject-01"
                     sh "kubectl get nodes"
