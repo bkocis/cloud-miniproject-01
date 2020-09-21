@@ -40,11 +40,20 @@ pipeline {
 			    }
             }
 		}
+        stage('create systemd service') {
+            agent any
+              steps{
+                withEnv(["HOME=${env.WORKSPACE}"]) {
+                    sh "cp app-flask.service /etc/systemd/system/"
+                    sh "ls /etc/systemd/system"
+                }
+              }
+        }	
         stage('run docker') {
             agent any
               steps{
                 withDockerRegistry([url: "", credentialsId: "bkocisdocker"]){
-                sh 'docker run -p 8081:8081 cloud-miniproject-01'
+                sh '# docker run -p 8081:8081 cloud-miniproject-01'
                 }
               }
         }		
