@@ -43,10 +43,8 @@ pipeline {
         stage('create systemd service') {
             agent any
               steps{
-                withEnv(["HOME=${env.WORKSPACE}"]) {
                     sh "cp app-flask.service /etc/systemd/system/"
                     sh "ls /etc/systemd/system"
-                }
               }
         }	
         stage('run docker') {
