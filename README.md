@@ -11,6 +11,9 @@ Branch (`git checkout <BRANCH>`):
 - __test-kubernetes__
 	The build in this branch defines a kubernetes cluster in one stage of the jenkins build, and in another one deploys the defined docker image. After the last stage is finished, the app that is now running in the kubernetes cluster, can be reached via the load balancer's public address (and defined port). 
 
+- __test-systemd__
+	Building with Jenkind and setting up systemd for the app server
+
 
 ## Screenshots
 
