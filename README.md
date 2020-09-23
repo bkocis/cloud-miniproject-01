@@ -12,8 +12,6 @@ After=multi-user.target
 [Service]
 Type=Simple
 ExacStart=/home/user/v_env/bokeh_1.3/bin/bokeh serve /path/to/app/ --flags
-#ExacStart=/home/user/v_env/bokeh_1.3/bin/bokeh serve /path/to/app/ --flags
-
 
 [Install]
 WantedBy=multi-user.target
