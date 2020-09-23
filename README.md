@@ -12,6 +12,8 @@ After=multi-user.target
 [Service]
 Type=Simple
 ExacStart=/home/user/v_env/bokeh_1.3/bin/bokeh serve /path/to/app/ --flags
+#ExacStart=/home/user/v_env/bokeh_1.3/bin/bokeh serve /path/to/app/ --flags
+
 
 [Install]
 WantedBy=multi-user.target
@@ -20,5 +22,7 @@ WantedBy=multi-user.target
 After the file is put into the `/etc/systemd/system` folder, run 
 `sudo systemctl daemon-reload`
 `sudo systemctl start service-name.service`
+
+
 
 
