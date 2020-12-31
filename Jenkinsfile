@@ -8,7 +8,7 @@ pipeline {
             }
         }
         stage('Unit test flask app') {
-            agent { docker { image 'python:3.7.2' } }
+            agent { docker { image 'python:3.8.2' } }
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                 sh '''
